@@ -88,7 +88,7 @@ class OrdinanceController extends Controller
                     
                 ]
             );
-            if(! is_null(request('file')))
+            if(! is_null(request('file')))//added by SJ 06182020 
             {     
                 foreach($ordinance_file as $value)
                 {   
