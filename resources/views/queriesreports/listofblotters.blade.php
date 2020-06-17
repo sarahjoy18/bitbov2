@@ -168,7 +168,8 @@
                         <select class="form-control" data-style="btn-lime" id="editcstatus" name="editcstatus">
                             <option id="All">All</option>
                             <option value="Pending">Pending</option>
-                            <option value="Closed">Closed</option>                          
+                            <option value="For Referral">For Referral</option>  
+                            <option value="Resolved">Resolved</option>                          
                         </select>
                         
                     </div>
@@ -283,7 +284,7 @@
                                     <tr>
                                         
                                         <td style="text-align: left; ">{{$blotter->blotter_code}}</td>
-                                        <td style="text-align: left; ">{{$blotter->blotter_name}}</td>
+                                        <td style="text-align: left; ">{{$blotter->blotter_subject}}</td>
                                         <td style="text-align: left; ">{{$blotter->complaint_date}}</td>
                                         <td style="text-align: left; ">{{$blotter->complaint_name}}</td>
                                         <td style="text-align: left; ">{{$blotter->incident_date}}</td>

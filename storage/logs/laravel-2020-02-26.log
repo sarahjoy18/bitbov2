@@ -1,0 +1,8 @@
+[2020-02-26 02:47:55] local.ERROR: Maximum execution time of 180 seconds exceeded {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Maximum execution time of 180 seconds exceeded at C:\\Users\\home\\Documents\\EDCEL\\BITBO INSTALLER\\BITBo\\www\\app\\Http\\Controllers\\InstallationController.php:75)
+[stacktrace]
+#0 {main}
+"} 
+[2020-02-26 03:02:12] local.ERROR: Maximum execution time of 180 seconds exceeded {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Maximum execution time of 180 seconds exceeded at C:\\Users\\home\\Documents\\EDCEL\\BITBO INSTALLER\\BITBo\\www\\app\\Http\\Controllers\\InstallationController.php:75)
+[stacktrace]
+#0 {main}
+"} 

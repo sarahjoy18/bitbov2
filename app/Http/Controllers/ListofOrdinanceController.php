@@ -33,26 +33,41 @@ class ListofOrdinanceController extends Controller
 
     public function getfilter($data,$fromdate,$todate)
     {   
-        $fromdate != '' && $todate != '' ?        
-        $DisplayTable = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID, CONCAT(RBI.LASTNAME,' ', RBI.FIRSTNAME, ' ', RBI.MIDDLENAME) AS FULLNAME,
+        // $fromdate != '' && $todate != '' ?        
+        // $DisplayTable = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID, CONCAT(RBI.LASTNAME,' ', RBI.FIRSTNAME, ' ', RBI.MIDDLENAME) AS FULLNAME,
+        //                                     O.ORDINANCE_AUTHOR, O.ORDINANCE_TITLE, OC.ORDINANCE_CATEGORY_NAME, O.ORDINANCE_SANCTION, O.ORDINANCE_REMARKS, O.ACTIVE_FLAG
+        //                                     FROM t_ordinance AS O
+        //                                     INNER JOIN t_barangay_official BO ON O.BARANGAY_OFFICIAL_ID = BO.BARANGAY_OFFICIAL_ID
+        //                                     INNER JOIN t_resident_basic_info RBI ON BO.RESIDENT_ID = RBI.RESIDENT_ID
+        //                                     INNER JOIN r_ordinance_category OC ON O.ORDINANCE_CATEGORY_ID = OC.ORDINANCE_CATEGORY_ID
+        //                                     WHERE OC.ORDINANCE_CATEGORY_NAME = '$data'
+        //                                     AND O.CREATED_AT BETWEEN '$fromdate' AND '$todate'
+        //                                     "))
+        // :
+        // $DisplayTable = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID, CONCAT(RBI.LASTNAME,' ', RBI.FIRSTNAME, ' ', RBI.MIDDLENAME) AS FULLNAME,
+        //                                     O.ORDINANCE_AUTHOR, O.ORDINANCE_TITLE, OC.ORDINANCE_CATEGORY_NAME, O.ORDINANCE_SANCTION, O.ORDINANCE_REMARKS, O.ACTIVE_FLAG
+        //                                     FROM t_ordinance AS O
+        //                                     INNER JOIN t_barangay_official BO ON O.BARANGAY_OFFICIAL_ID = BO.BARANGAY_OFFICIAL_ID
+        //                                     INNER JOIN t_resident_basic_info RBI ON BO.RESIDENT_ID = RBI.RESIDENT_ID
+        //                                     INNER JOIN r_ordinance_category OC ON O.ORDINANCE_CATEGORY_ID = OC.ORDINANCE_CATEGORY_ID
+        //                                     WHERE OC.ORDINANCE_CATEGORY_NAME = '$data'                                            
+        //                                     "));
+        
+         $fromdate != '' && $todate != '' ?        
+        $DisplayTable = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID, 
                                             O.ORDINANCE_AUTHOR, O.ORDINANCE_TITLE, OC.ORDINANCE_CATEGORY_NAME, O.ORDINANCE_SANCTION, O.ORDINANCE_REMARKS, O.ACTIVE_FLAG
                                             FROM t_ordinance AS O
-                                            INNER JOIN t_barangay_official BO ON O.BARANGAY_OFFICIAL_ID = BO.BARANGAY_OFFICIAL_ID
-                                            INNER JOIN t_resident_basic_info RBI ON BO.RESIDENT_ID = RBI.RESIDENT_ID
                                             INNER JOIN r_ordinance_category OC ON O.ORDINANCE_CATEGORY_ID = OC.ORDINANCE_CATEGORY_ID
                                             WHERE OC.ORDINANCE_CATEGORY_NAME = '$data'
                                             AND O.CREATED_AT BETWEEN '$fromdate' AND '$todate'
                                             "))
         :
-        $DisplayTable = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID, CONCAT(RBI.LASTNAME,' ', RBI.FIRSTNAME, ' ', RBI.MIDDLENAME) AS FULLNAME,
+        $DisplayTable = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID,
                                             O.ORDINANCE_AUTHOR, O.ORDINANCE_TITLE, OC.ORDINANCE_CATEGORY_NAME, O.ORDINANCE_SANCTION, O.ORDINANCE_REMARKS, O.ACTIVE_FLAG
                                             FROM t_ordinance AS O
-                                            INNER JOIN t_barangay_official BO ON O.BARANGAY_OFFICIAL_ID = BO.BARANGAY_OFFICIAL_ID
-                                            INNER JOIN t_resident_basic_info RBI ON BO.RESIDENT_ID = RBI.RESIDENT_ID
                                             INNER JOIN r_ordinance_category OC ON O.ORDINANCE_CATEGORY_ID = OC.ORDINANCE_CATEGORY_ID
                                             WHERE OC.ORDINANCE_CATEGORY_NAME = '$data'                                            
                                             "));
-        
         
         return $DisplayTable;
                                         

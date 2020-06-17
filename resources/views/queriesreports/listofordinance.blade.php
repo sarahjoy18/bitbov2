@@ -210,11 +210,11 @@
     <ol class="breadcrumb pull-right">
         <li class="breadcrumb-item"><a href="javascript:;">Queries and Reports</a></li>
         
-        <li class="breadcrumb-item active">List of Barangay Officials</li>
+        <li class="breadcrumb-item active">List of Ordinances</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">List of Barangay Offiicals<br><small>You can filter Barangay Offiicals reports.</small></h1>
+    <h1 class="page-header">List of Ordinances<br><small>You can filter Ordinance reports.</small></h1>
     <!-- end page-header -->
 
     <!-- begin row -->
@@ -294,7 +294,7 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 
                             </div>
-                            <h4 class="panel-title">Officials</h4>
+                            <h4 class="panel-title">Ordinances</h4>
                         </div>
                         <!-- end panel-heading -->
                         <!-- begin alert -->

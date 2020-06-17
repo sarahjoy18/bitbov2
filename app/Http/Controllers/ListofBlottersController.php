@@ -11,7 +11,7 @@ class ListofBlottersController extends Controller
     {
        	
        	$DisplayTable = DB::table('t_blotter AS B')
-                            ->join('r_blotter_subjects AS BS', 'B.blotter_subject_id', '=', 'BS.blotter_subject_id')
+                            //->join('r_blotter_subjects AS BS', 'B.blotter_subject_id', '=', 'BS.blotter_subject_id')
                             ->leftjoin('t_resident_basic_info AS R', 'B.accused_resident', '=', 'R.resident_id')
                             ->select('B.blotter_id'
                                 , 'B.blotter_code'
@@ -23,8 +23,8 @@ class ListofBlottersController extends Controller
                                 , 'B.complaint_statement'
                                 , 'B.resolution'
                                 , 'B.status'
-                                , 'BS.blotter_subject_id'
-                                , 'BS.blotter_name'
+                                //, 'BS.blotter_subject_id'
+                                , 'B.blotter_subject'
                                 , 'R.resident_id'
                                 , 'R.lastname'
                                 , 'R.middlename'
@@ -41,35 +41,58 @@ class ListofBlottersController extends Controller
     }
     public function gettable()
     {
-    	return $blotters = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, BS.blotter_subject_id, BS.blotter_name, R.resident_id, R.lastname, R.middlename, R.firstname
+    	// return $blotters = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, BS.blotter_subject_id, BS.blotter_name, R.resident_id, R.lastname, R.middlename, R.firstname
+     //                        FROM `t_blotter` AS B
+     //                        INNER JOIN r_blotter_subjects AS BS
+     //                        ON B.blotter_subject_id = BS.blotter_subject_id
+     //                        LEFT JOIN t_resident_basic_info AS R
+     //                        ON B.accused_resident = R.resident_id"));
+
+        return $blotters = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, BS.blotter_subject, R.resident_id, R.lastname, R.middlename, R.firstname
                             FROM `t_blotter` AS B
-                            INNER JOIN r_blotter_subjects AS BS
-                            ON B.blotter_subject_id = BS.blotter_subject_id
                             LEFT JOIN t_resident_basic_info AS R
                             ON B.accused_resident = R.resident_id"));
         //return response()->json($blotters);
     }
     public function getfilter($data,$fromdate,$todate)
     {   
-        $fromdate != '' && $todate != '' ?        
-        $DisplayTable = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, BS.blotter_subject_id, BS.blotter_name, R.resident_id, R.lastname, R.middlename, R.firstname
+        // $fromdate != '' && $todate != '' ?        
+        // $DisplayTable = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, BS.blotter_subject_id, BS.blotter_name, R.resident_id, R.lastname, R.middlename, R.firstname
+        //                                         FROM `t_blotter` AS B
+        //                                         INNER JOIN r_blotter_subjects AS BS
+        //                                         ON B.blotter_subject_id = BS.blotter_subject_id
+        //                                         LEFT JOIN t_resident_basic_info AS R
+        //                                         ON B.accused_resident = R.resident_id
+        //                                         where B.status ='$data'
+        //                                         AND B.CREATED_AT BETWEEN '$fromdate' AND '$todate'
+        //                                     "))
+        // :
+        // $DisplayTable = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, BS.blotter_subject_id, BS.blotter_name, R.resident_id, R.lastname, R.middlename, R.firstname
+        //                                         FROM `t_blotter` AS B
+        //                                         INNER JOIN r_blotter_subjects AS BS
+        //                                         ON B.blotter_subject_id = BS.blotter_subject_id
+        //                                         LEFT JOIN t_resident_basic_info AS R
+        //                                         ON B.accused_resident = R.resident_id
+        //                                         where B.status ='$data'                                          
+        //                                     "));
+        //                                     
+        
+         $fromdate != '' && $todate != '' ?        
+        $DisplayTable = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, B.blotter_subject, R.resident_id, R.lastname, R.middlename, R.firstname
                                                 FROM `t_blotter` AS B
-                                                INNER JOIN r_blotter_subjects AS BS
-                                                ON B.blotter_subject_id = BS.blotter_subject_id
                                                 LEFT JOIN t_resident_basic_info AS R
                                                 ON B.accused_resident = R.resident_id
                                                 where B.status ='$data'
                                                 AND B.CREATED_AT BETWEEN '$fromdate' AND '$todate'
                                             "))
         :
-        $DisplayTable = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status, BS.blotter_subject_id, BS.blotter_name, R.resident_id, R.lastname, R.middlename, R.firstname
+        $DisplayTable = COLLECT(\DB::SELECT("SELECT B.blotter_id, B.blotter_code, B.blotter_subject_id, B.incident_date, B.incident_area, B.complaint_name, B.complaint_date, B.complaint_statement, B.resolution, B.status,  B.blotter_subject, R.resident_id, R.lastname, R.middlename, R.firstname
                                                 FROM `t_blotter` AS B
-                                                INNER JOIN r_blotter_subjects AS BS
-                                                ON B.blotter_subject_id = BS.blotter_subject_id
                                                 LEFT JOIN t_resident_basic_info AS R
                                                 ON B.accused_resident = R.resident_id
                                                 where B.status ='$data'                                          
                                             "));
+        
         
         
         return $DisplayTable;
