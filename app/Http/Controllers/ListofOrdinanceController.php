@@ -17,6 +17,7 @@ class ListofOrdinanceController extends Controller
 
     public function getordinances()
     {
+        //query edited by SJ 06182020
     	// return $ordinances = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID, CONCAT(RBI.LASTNAME,' ', RBI.FIRSTNAME, ' ', RBI.MIDDLENAME) AS FULLNAME,
      //                                        O.ORDINANCE_AUTHOR, O.ORDINANCE_TITLE, OC.ORDINANCE_CATEGORY_NAME, O.ORDINANCE_SANCTION, O.ORDINANCE_REMARKS, O.ACTIVE_FLAG
      //                                        FROM t_ordinance AS O

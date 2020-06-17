@@ -155,10 +155,12 @@ class residents implements ToModel, WithStartRow
         $resmaxid=\DB::TABLE('T_RESIDENT_BASIC_INFO')->MAX('RESIDENT_ID');
        
 
-        $familyheaderid=\DB::TABLE('T_FAMILY_HEADER') //Created T_FAMILY_HEADER in database - SJ 06152020
+       // $familyheaderid=\DB::TABLE('T_FAMILY_HEADER') //Created T_FAMILY_HEADER in database - SJ 06152020
+        $familyheaderid=\DB::TABLE('T_HOUSEHOLD_BATCH')
         ->INSERTGETID(['CREATED_AT'=>\DB::RAW('CURRENT_TIMESTAMP')]);
 
-        \DB::TABLE('T_FAMILY_INFORMATION') //Created T_FAMILY_INFORMATION in database - SJ 06152020
+        //\DB::TABLE('T_FAMILY_INFORMATION') //Created T_FAMILY_INFORMATION in database - SJ 06152020
+        \DB::TABLE('T_HOUSEHOLD_MEMBERS') 
         ->INSERT(
             [
                 'FAMILY_HEADER_ID'=>$familyheaderid,
@@ -184,7 +186,8 @@ class householdmembers implements ToModel, WithStartRow
         
         $resmaxid=\DB::TABLE('T_RESIDENT_BASIC_INFO')->MAX('RESIDENT_ID');
         
-        $familyheaderid=\DB::TABLE('T_FAMILY_HEADER')->MAX('FAMILY_HEADER_ID');
+        // $familyheaderid=\DB::TABLE('T_FAMILY_HEADER')->MAX('FAMILY_HEADER_ID');
+        $familyheaderid=\DB::TABLE('T_HOUSEHOLD_BATCH')->MAX('FAMILY_HEADER_ID');
         $householdmax=\DB::TABLE('T_HOUSEHOLD_INFORMATION')->MAX('HOUSEHOLD_ID');
         $lastresidentid=\DB::TABLE("T_RESIDENT_BASIC_INFO")
         ->INSERTGETID([
@@ -217,7 +220,8 @@ class householdmembers implements ToModel, WithStartRow
 
 
 
-        \DB::TABLE('T_FAMILY_INFORMATION')
+        // \DB::TABLE('T_FAMILY_INFORMATION')
+        \DB::TABLE('T_HOUSEHOLD_MEMBERS')
         ->INSERT(
             [
                 'FAMILY_HEADER_ID' => $familyheaderid,

@@ -12,8 +12,18 @@ class ChildrenProfileController extends Controller
     public function index()
     {
 
-       
-    	return view('resident.childrenprofile');
+       // $ChildrenTable = DB::TABLE('t_children_profile AS C')
+       //                  ->JOIN('t_resident_basic_info AS T','C.RESIDENT_ID','T.RESIDENT_ID')
+       //                  ->WHERE('T.SEX', 'Male')
+       //                  ->SELECT
+       //                  (
+       //                      'C.','F.FATHER_MOTHER_TONGUE',
+       //                      'F.FATHER_OTHER_DIALECTS','F.FATHER_EDUCATIONAL_ATTAINMENT',
+       //                      'T.LASTNAME','T.FIRSTNAME','T.MIDDLENAME','T.ACTIVE_FLAG'
+       //                  )
+       //                  ->GET();
+    	//return view('resident.childrenprofile', compact($ChildrenTable));
+       return view('resident.childrenprofile');
     }
 
     public function loadchildren() 

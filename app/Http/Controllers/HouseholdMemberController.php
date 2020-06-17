@@ -16,7 +16,7 @@ class HouseholdMemberController extends Controller
             $id = 0;
         }
 
-    	$result = db::select("call sp_gethousehold_mebers(?)",[$id]);
+    	$result = db::select("call sp_gethousehold_members(?)",[$id]);
         //return view('queriesreports.rbi_report', compact('result','id'));
     	return view('resident.householdmembers', compact('result','id'));
 
