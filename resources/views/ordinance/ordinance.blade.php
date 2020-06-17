@@ -177,14 +177,14 @@ $(document).ready(function() {
 
 var Addform = document.getElementById("AddForm");
 $('#AddBtn').click(function(e) {
-
+    alert('add!');
 
     var title, author, assignoff, category, sanction, description, remarks;
 
     title = $('#title_txt').val();
     author = $('#author_txt').val();
     
-    // category = $('#categname').children(":selected").attr("id");
+    category = $('#categname').children(":selected").attr("id");
     sanction = $('#sanction_txt').val();
     description = $('#desc_txt').val();
     remarks = $('#remarks_txt').val();
@@ -194,7 +194,7 @@ $('#AddBtn').click(function(e) {
     fd.append('title',title);
     fd.append('author',author);
     
-    // fd.append('category',category);temporary commented
+    fd.append('category',category);
     fd.append('santion',sanction);
     fd.append('description',description);
     fd.append('remarks',remarks);
@@ -359,7 +359,9 @@ $(document).ready(function()
         var title = $(this).closest('table tr').find('td:eq(2)').html();
         $('#TitleViewTxt').val(title);
         
-        // $("#CategoryViewTxt").val($(this).closest('table tr').find('td:eq(4)').html());
+        var category_id = $(this).closest('table tr').find('td:eq(7)').html();
+        $("#CategoryViewTxt option[id='" + category_id + "']").attr('selected', 'selected');
+         //$("#CategoryViewTxt").val($(this).closest('table tr').find('td:eq(7)').html());
        
         $("#RemarksViewTxt").val($(this).closest('table tr').find('td:eq(3)').html());
         $("#SanctionViewTxt").val($(this).closest('table tr').find('td:eq(4)').html());        
@@ -480,6 +482,7 @@ $(document).ready(function()
                                             <th >Sanction</th>
                                             <th hidden>file</th>
                                             <th hidden>Description</th>
+                                            <th hidden>Category</th>
                                             <th >Actions</th>
                                         </tr>
                                     </thead>
@@ -495,6 +498,7 @@ $(document).ready(function()
                                         <td style="background-color: {{ $record->ACTIVE_FLAG == 1 ? '#ddefc9' : '#ffcdcc'}}">{{ $record->ORDINANCE_SANCTION }}</td>
                                         <td hidden>HIDDEN</td>
                                         <td hidden>{{ $record->ORDINANCE_DESCRIPTION }}</td>
+                                        <td hidden>{{ $record->ORDINANCE_CATEGORY_ID }}</td>
                                         <td style="background-color: {{ $record->ACTIVE_FLAG == 1 ? '#ddefc9' : '#ffcdcc'}}" >
                                             <button type='button' class='btn btn-warning form-control ViewModal' data-toggle='modal' data-target='#ViewModal'>
                                                 <i class='fa fa-eye'></i> View
@@ -565,8 +569,8 @@ $(document).ready(function()
 
                                         <br>
 
-                                        {{-- temporary commented start--}}
-                                        {{-- <div class="row">
+                                        
+                                        <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <label style="display: block; text-align: left">Category</label>
                                                 <select id="categname" class="form-control" name="categname" data-style="select-with-transition">
@@ -575,8 +579,8 @@ $(document).ready(function()
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div> --}}
-                                        {{-- temporary commented end--}}
+                                        </div>
+                                        
 
                                         <br>
                                         <div class="row">
@@ -667,7 +671,7 @@ $(document).ready(function()
 
                                 </div> <br>
                         
-                            {{-- <div class="row">
+                            <div class="row">
                                 <div class="col-lg-12 col-md-6">
                                     <label style="display: block; text-align: left">&nbspCategory</label>
                                     
@@ -682,7 +686,7 @@ $(document).ready(function()
                                    
                                 </div>
 
-                            </div> --}}
+                            </div>
                             <br>
                             <div class="row">
                                 <div class="col-lg-12 col-md-6">

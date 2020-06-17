@@ -12,7 +12,8 @@ class OrdinanceController extends Controller
         $barangay_id = session('session_brgy_id');
 
         $ordinances = COLLECT(\DB::SELECT("SELECT O.ORDINANCE_ID,
-                                            O.ORDINANCE_AUTHOR, O.ORDINANCE_TITLE, O.ORDINANCE_SANCTION, O.ORDINANCE_REMARKS,    O.ORDINANCE_DESCRIPTION, O.ACTIVE_FLAG
+                                            O.ORDINANCE_AUTHOR, O.ORDINANCE_TITLE, O.ORDINANCE_SANCTION, O.ORDINANCE_REMARKS,    O.ORDINANCE_DESCRIPTION, O.ACTIVE_FLAG,
+                                                O.ORDINANCE_CATEGORY_ID
                                             FROM t_ordinance AS O                                            
                                             "));
 
@@ -42,7 +43,7 @@ class OrdinanceController extends Controller
                     'ORDINANCE_DESCRIPTION'=> request('description'),
                     'ORDINANCE_AUTHOR'     => request('author'),
                     'ORDINANCE_SANCTION'   => request('santion'),
-
+                    'ORDINANCE_CATEGORY_ID'     => request('category'),
                     'ORDINANCE_REMARKS'    => request('remarks'),                    
                     
                     'ACTIVE_FLAG' => 1
@@ -69,7 +70,7 @@ class OrdinanceController extends Controller
     public function update()
     {
 
-        $ordinance_file = request()->file('file[]');
+        $ordinance_file = request()->file('file');
         $ordinance_id = request('ordinance_id');
             \DB::TABLE('t_ordinance')
             ->where('ORDINANCE_ID',$ordinance_id)
@@ -81,23 +82,26 @@ class OrdinanceController extends Controller
                     //edited by SJ 06172020 - changed request('santion') to request('sanction')
                     //related file - resources/views/ordinance/ordinance.blade.php
                     'ORDINANCE_SANCTION'   => request('sanction'), 
-
+                    'ORDINANCE_CATEGORY_ID'     => request('category'),
                     'ORDINANCE_REMARKS'    => request('remarks'),
                     
                     
                 ]
-            );     
-            foreach($ordinance_file as $value)
-            {   
-                \DB::TABLE('t_ordinance_images')
-                ->update(
-                    [
-                        'ORDINANCE_ID'      => $ordinance_id,
-                        'FILE_NAME'         => $value->getClientOriginalName()
-                    ]
-                );
-                $value->move(public_path('ordinances'), $value->getClientOriginalName());  
-            }   
+            );
+            if(! is_null(request('file')))
+            {     
+                foreach($ordinance_file as $value)
+                {   
+                    \DB::TABLE('t_ordinance_images')
+                    ->update(
+                        [
+                            'ORDINANCE_ID'      => $ordinance_id,
+                            'FILE_NAME'         => $value->getClientOriginalName()
+                        ]
+                    );
+                    $value->move(public_path('ordinances'), $value->getClientOriginalName());  
+                }   
+            }
             
             echo "good";
     }

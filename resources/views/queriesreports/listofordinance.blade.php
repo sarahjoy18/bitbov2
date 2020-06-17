@@ -83,7 +83,8 @@
         setTimeout(() => {
             $('#spnner').show();
 
-            var  FULLNAME, ORDINANCE_AUTHOR, ORDINANCE_TITLE, ORDINANCE_CATEGORY_NAME, ORDINANCE_SANCTION ,ORDINANCE_REMARKS;
+            //var  FULLNAME, 
+            var ORDINANCE_AUTHOR, ORDINANCE_TITLE, ORDINANCE_CATEGORY_NAME, ORDINANCE_SANCTION ,ORDINANCE_REMARKS;
             ACTIVE_FLAG = 1;
             $.ajax({
                 url:"{{route('LisfofOrdiananceFilter')}}",
@@ -102,7 +103,7 @@
                     $('#data-table-default').DataTable().rows().remove().draw();
                     data.map( value => { 
                         
-                        FULLNAME = value.FULLNAME;
+                        //FULLNAME = value.FULLNAME;
                         ORDINANCE_AUTHOR = value.ORDINANCE_AUTHOR;
                         ORDINANCE_TITLE = value.ORDINANCE_TITLE;                                                          
                         ORDINANCE_CATEGORY_NAME = value.ORDINANCE_CATEGORY_NAME;
@@ -128,7 +129,7 @@
                         (
                             
                             [
-                                FULLNAME,
+                                //FULLNAME,
                                 ORDINANCE_AUTHOR,
                                 ORDINANCE_TITLE,
                                 ORDINANCE_CATEGORY_NAME,
@@ -223,7 +224,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-6">
                     <div class="stats-content">
-                        <label style="display: block; text-align: left">Position Name</label>
+                        <label style="display: block; text-align: left">Category</label>
 
                         <select class="form-control" data-style="btn-lime" id="editcstatus" name="editcstatus">
                             <option id="All">All</option>
@@ -329,17 +330,11 @@
                                                     <tr>
                                                         
                                                                    
-                                                        <th >Assigned Official</th>
+                                                        <!-- <th >Assigned Official</th> -->
                                                         <th >Author</th>
                                                         <th >Title</th>
                                                         <th >Category</th>
-                                                        
-                                                     
-                                                      
                                                         <th >Remarks</th>
-
-
-
                                                         <th >Sanction</th>
                                                         
                                                     </tr>
@@ -348,19 +343,19 @@
                                                    @foreach($ordinances as $record)
                                                      <tr >
                                                       
-                                                        {{--<td class="tablecell" name="td_name">{{ $record->FULLNAME }}</td>
+                                                        <!-- <td class="tablecell" name="td_name"></td> -->
                                                         <td class="tablecell"> {{ $record->ORDINANCE_AUTHOR }}</td>
                                                         <td class="tablecell">{{ $record->ORDINANCE_TITLE }}</td>
                                                         <td class="tablecell">{{ $record->ORDINANCE_CATEGORY_NAME }}</td>
                                                         <td class="tablecell">{{ $record->ORDINANCE_REMARKS }}</td>
-                                                        <td class="tablecell">{{ $record->ORDINANCE_SANCTION }}</td>--}}
+                                                        <td class="tablecell">{{ $record->ORDINANCE_SANCTION }}</td>
 
-                                                        <td >{{ $record->FULLNAME }}</td>
+                                                       <!--  <td ></td>
                                                         <td >{{ $record->ORDINANCE_AUTHOR }}</td>
                                                         <td >{{ $record->ORDINANCE_TITLE }}</td>
                                                         <td >{{ $record->ORDINANCE_CATEGORY_NAME }}</td>
                                                         <td >{{ $record->ORDINANCE_REMARKS }}</td>
-                                                        <td >{{ $record->ORDINANCE_SANCTION }}</td>
+                                                        <td >{{ $record->ORDINANCE_SANCTION }}</td> -->
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
