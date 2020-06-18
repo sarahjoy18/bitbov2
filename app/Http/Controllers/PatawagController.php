@@ -36,25 +36,31 @@ class PatawagController extends Controller
 
     public function store(Request $request)
     {
-        $date = $request->input('AddScheduledDate');
-        $intime = $request->input('AddScheduledTime');
-        $time = date("H:i:s", strtotime($intime));
-        $datetime = Carbon::createFromTimestamp(strtotime($date.' '.$time));
-        
-        
-        DB::table('t_patawag')->insert([
-                                        'BLOTTER_ID' => $request->input('EditBlotterIDH'),
-                                        'patawag_sched_datetime' => $date.' '.$time,
-                                        'patawag_sched_place' => $request->input('addScheduledPlace')
-                                        ]);
-        //  update number of patawag
-        db::table('t_blotter')
-            ->where('BLOTTER_ID', $request->input('EditBlotterIDH'))
-            ->update([
-                "NO_OF_PATAWAG" =>   db::table('t_patawag')->where('BLOTTER_ID',$request->input('EditBlotterIDH'))->count()
-            ]);
-                            
-        
+        try {
+            $date = $request->input('AddScheduledDate');
+            $intime = $request->input('AddScheduledTime');
+            $time = date("H:i:s", strtotime($intime));
+            $datetime = Carbon::createFromTimestamp(strtotime($date.' '.$time));
+            
+            
+            DB::table('t_patawag')->insert([
+                                            'BLOTTER_ID' => $request->input('EditBlotterIDH'),
+                                            'patawag_sched_datetime' => $date.' '.$time,
+                                            'patawag_sched_place' => $request->input('addScheduledPlace')
+                                            ]);
+            //  update number of patawag
+            DB::table('t_blotter')
+                ->where('BLOTTER_ID', $request->input('EditBlotterIDH'))
+                ->update([
+                    "NO_OF_PATAWAG" =>   db::table('t_patawag')->where('BLOTTER_ID',$request->input('EditBlotterIDH'))->count()
+                ]);
+
+            return response('Schedule added successfully!', 200)->header('Content-Type', 'text/plain');
+
+        } catch (\Exception $e) {
+
+            return response('$e->getMessage()', 400)->header('Content-Type', 'text/plain');
+        }
     }
 
     public function update(Request $request)

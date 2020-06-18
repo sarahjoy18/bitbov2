@@ -302,6 +302,7 @@
                                 +'<h4 class="title"><a href="javascript:;">'+residents['FULLNAME']+'</a></h4>\n'
                                 +'<p class="location" style="font-size: 20px; color: black;">Birth details: <h>'+residents['PLACE_OF_BIRTH']+', '+residents['DATE_OF_BIRTH']+'</h></p>\n'
                                 +'<p class="desc" style="font-size: 20pxpx">'+faddress+'</p>\n'
+                                +'<input type="hidden" class="resident_id" value="'+resident_id+'">\n'
                                  +'<button data-toggle="modal" data-target="#show_assigning" class="btn btn-yellow btn-block" id="ab_btn">Assign as Barangay Official</button>\n'
                             +'</div>\n'
 
@@ -331,8 +332,9 @@
     });
 
     $(document).on('click','#ab_btn',function() {
-        $('#afullname').text(fullname);
-        $('#aBarangayPosIDTxt').val(resident_id);
+        //edited by SJ 06182020 - fixed assigning of barangay official from the residents search result
+        $('#afullname').text($(this).siblings('.title').find('a').html());
+        $('#aBarangayPosIDTxt').val($(this).siblings('.resident_id').val());
 
     });
 </script>

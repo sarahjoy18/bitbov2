@@ -127,7 +127,7 @@ class InstallationController extends Controller
                     "SECRET_ANSWER" => request('secret_answer_txt'),  
                     //edited by SJ 06172020 - added PERMISSIONS FOR ADMIN - Data Migration, User Accounts, Barangay Configuration
                     "PERMIS_DATA_MIGRATION" => 1,  
-                    "PERMIS_USER_ACCOUNT" => 1, 
+                    "PERMIS_USER_ACCOUNTS" => 1, 
                     "PERMIS_BARANGAY_CONFIG" => 1,  
                     "ACTIVE_FLAG" => 1,  
 

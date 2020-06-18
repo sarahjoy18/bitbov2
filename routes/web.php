@@ -30,7 +30,7 @@ Route::post('/TestConnection', 'InstallationController@test_connection')
             ->name('TestConnection');   
 
 Route::group(['' => ''], function (){
-    Route::get('/Blotter', 'BlottersController@index')
+    Route::match(['get', 'post'],'/Blotter', 'BlottersController@index')
         ->name('Blotter');
     Route::POST('/AddBlotter', 'BlottersController@store')
     ->name('AddBlotter');

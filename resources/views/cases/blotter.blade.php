@@ -214,7 +214,8 @@
     <script>
         var Hearingform = document.getElementById("schedHearingForm");
 
-        $("a[id='ScheduleBTN']").on('click',function () {
+        $("#ScheduleBTN").on('click',function () {
+
             var my_date = $('#AddScheduledDate').val()
             get_convert = moment(my_date).format('YYYY-MM-DD, h:mm A');
             schedDate = get_convert.split(", ")[0];
@@ -263,34 +264,26 @@
             }
             else
             {
-                swal({
-                    title: 'Success!',
-                    text: 'You have successfully scheduled a hearing.',
-                    icon: 'success',
-
-                } );
-
-                try
-                {
-                    $.ajax({
-                        url:"{{route('AddPatawag')}}",
-                        type:'POST',
-                    
-                        async:false,
-                        data:data,
-                        success:function()
-                        {
-                            location.reload();
-                        }
-
-                    })
-                }
-                
-                catch(error)
-                {
-                    console.error(error)
-                }
-
+                $.ajax({
+                  url: "{{route('AddPatawag')}}",
+                  method:'POST',
+                  data:data,
+                  context: document.body,
+                    }).done(function() {
+                      console.log('umabot ako dito');
+                      swal({
+                            title: 'Success!',
+                            text: 'You have successfully scheduled a hearing.',
+                            icon: 'success',
+                        } );
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log('jqXHR:',jqXHR);
+                        console.log('textStatus:',textStatus);
+                        console.log('errorThrown:',errorThrown);
+                      })
+                      .always(function() {
+                        alert( "complete" );
+                      });
             }
 
         });
@@ -760,9 +753,10 @@
                 no_of_patawag = $(this).closest("tbody tr").find("td:eq(11)").html();
              
                 if(no_of_patawag == 3)
-                {      alert(no_of_patawag);
+                {    
                     $("#ScheduleBTN").prop('disabled',true);
-                }else{
+                }
+                else{
                     $("#ScheduleBTN").prop('disabled',false);
                 }
             });
