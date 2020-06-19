@@ -119,7 +119,8 @@
             $('#edit_db_name').text(fullname);
             
            
-
+            var homeowner = table.cell(this,2).data();
+            var pstaying = table.cell(this,3).data();
             var edittoilet = table.cell( this, 5).data();           
             var parea =  table.cell( this, 6).data(); 
             var bedroom =  table.cell( this, 7).data(); 
@@ -144,7 +145,11 @@
             var bgames = table.cell( this, 26).data(); 
             var puzzle =  table.cell( this, 27).data(); 
           
-           $('#EditCatID').val(table.cell( this, 0).data());           
+           $('#EditCatID').val(table.cell( this, 0).data());       
+
+           $('#edithomeownership').val(homeowner);
+           $('#editpstaying').val(pstaying);
+
            $('#editnumberofrooms').val(table.cell( this, 28).data());
 
            if (edittoilet == 1) { document.getElementById('edittoilet').checked = true;} else if (edittoilet == 0) { document.getElementById('edittoilet').checked = false; }

@@ -399,11 +399,7 @@
 
             </thead>
             <tbody>
-              <td hidden>Children ID </td>
-                <td>Fullname</td>
-                <td>Birth Order</td>
-                <td>Birth Place</td>
-                <td style="width: 15%">Actions </td>
+             
             </tbody>
           </table>  
 

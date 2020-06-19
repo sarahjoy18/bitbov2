@@ -28,7 +28,7 @@ class ChildrenProfileController extends Controller
 
     public function loadchildren() 
     {
-    	$display_data = COLLECT(DB::SELECT("SELECT RESIDENT_ID, CONCAT(LASTNAME,' ',FIRSTNAME,' ',MIDDLENAME) AS FULLNAME , SEX FROM t_resident_basic_info WHERE RESIDENT_ID NOT IN (SELECT RESIDENT_ID FROM t_monthers_profile) AND 
+    	$display_data = COLLECT(DB::SELECT("SELECT RESIDENT_ID, CONCAT(LASTNAME,' ',FIRSTNAME,' ',MIDDLENAME) AS FULLNAME , SEX FROM t_resident_basic_info WHERE RESIDENT_ID NOT IN (SELECT RESIDENT_ID FROM t_mothers_profile) AND 
 								RESIDENT_ID NOT IN (SELECT RESIDENT_ID FROM T_FATHERS_PROFILE) AND (YEAR(CURDATE())-YEAR(DATE_OF_BIRTH)) BETWEEN 1 AND 10"));
     	
     	return datatables()->of($display_data)->addIndexColumn()->make(true);
