@@ -181,7 +181,7 @@ ROUTE::GROUP(['' => ''], function (){
     ->NAME('ViewRbi');
 
     ROUTE::POST('/AddHouseholdMembers', 'HouseholdMemberController@addmember')
-    ->NAME('AddHouseholdMemberss');
+    ->NAME('AddHouseholdMembers');
 
     ROUTE::GET('/HouseholdList', 'HouseholdMemberController@hh_list')
     ->NAME('HouseholdList');

@@ -531,7 +531,8 @@ _setElements: function () {
                     rules:{
                       firstname: {
                           required: true,
-                          nowhitespace: true,
+                          //edited by SJ - 06212020 allow space in firstname
+                          //nowhitespace: true,
                           lettersonly: true
                       },
                       middlename: {
@@ -2072,7 +2073,8 @@ $(document).ready(function(){
         rules:{
           fname: {
               required: true,
-              nowhitespace: true,
+              //edited by SJ 06212020 - allow spaces for first name
+              //nowhitespace: true,
               lettersonly: true
           },
           mname: {
@@ -2104,7 +2106,8 @@ $(document).ready(function(){
     messages:{
       fname: {
           required: 'This field is required',
-          nowhitespace: 'No white space allowed',
+          //edited by SJ 06212020 - allow spaces for first name
+          //nowhitespace: 'No white space allowed',
           lettersonly: 'letters only'
       },
       mname: {

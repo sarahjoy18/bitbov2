@@ -170,7 +170,7 @@ class ResidentsController extends Controller
         
         for($i = 0 ;  $i < count($multi_rbi_first_name) ; $i++)
         {
-            $last_id           = DB::TABLE('t_household_information')
+            $last_id = DB::TABLE('t_household_information')
             ->INSERTGETID(
                 [
                     'HOME_OWNERSHIP' => $multi_rbi_homeownership[$i],                                                  
@@ -179,6 +179,7 @@ class ResidentsController extends Controller
                 ]
             );
             $check_rbi_if_complete = $multi_rbi_last_name[$i] != '' && $multi_rbi_first_name[$i] != '' && $multi_rbi_middle_name[$i] != '' && $multi_rbi_houseno[$i] != '' &&  $multi_rbi_hstreet[$i] != '' && $multi_rbi_hbuilding[$i] != '' && $multi_rbi_hunitno[$i] != '' &&  $multi_rbi_hsubdivision[$i] != ''       &&  $multi_rbi_date_of_birth[$i] != ''      &&  $multi_rbi_place_of_birth[$i] != ''     && $multi_rbi_sex[$i] != '' && $multi_rbi_civil_status[$i] != '' && $multi_rbi_citizenship[$i] != '' ?  1 : 0 ;
+
             $res_last_id = DB::TABLE('T_RESIDENT_BASIC_INFO')
             ->INSERTGETID(
                 [

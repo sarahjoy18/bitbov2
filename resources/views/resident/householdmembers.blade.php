@@ -79,7 +79,7 @@
               .then((willDelete) => {
                       if (willDelete) {
                           $.ajax({
-                                url: "{{route('AddHouseholdMemberss')}}",
+                                url: "{{route('AddHouseholdMembers')}}",
                                 type: "post",
                                 data: data,
                                 success: function(data)
