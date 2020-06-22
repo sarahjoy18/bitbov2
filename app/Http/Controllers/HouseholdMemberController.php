@@ -36,7 +36,7 @@ class HouseholdMemberController extends Controller
         }
         //dd($municipalinfo);
         $houseno = db::select("call sp_house_no(?)",[$id]);
-        $result = db::select("call sp_gethousehold_mebers(?)",[$id]);
+        $result = db::select("call sp_gethousehold_members(?)",[$id]);
         return view('queriesreports.rbi_report', compact('result','id','houseno','municipalinfo'));
     }
 
