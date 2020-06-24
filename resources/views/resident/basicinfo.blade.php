@@ -3084,7 +3084,7 @@ $("#register-btn").click(function(e){
             multi_rbi_sex.push($(this).val());
         });
 
-        $(".rbi-dateofbirth").each(function(){
+        $(".rbi-dateofbirth").each(function(index){
             multi_rbi_date_of_birth.push($(this).val());
 
 
@@ -3111,38 +3111,35 @@ $("#register-btn").click(function(e){
             var days = DaysBetween(dob_year,current_year);
 
 
-            $("#rbi-age").val(age)
-                        if (age==0 || age<0) {
-                if ( days <= 28 && days >= 0 ) {
+            //edited by SJ 06242020 - to fix rbi_store(), multi-rbi-status
+            //$("#rbi-age[]").val(age);
+            $('[name=rbi-age]').eq(index).val(age);
+            var status = "";
 
-                    var status = "newborn";
-                    multi_rbi_status.push(status);
+
+            if (age==0 || age<0) {
+                if ( days <= 28 && days >= 0 ) {
+                    status = "newborn";
 
                 }
                 else if ( days >= 29 ) {
-
-                    var status = "infant";
-                    multi_rbi_status.push(status);
+                    status = "infant";
                 }
-                }
-                else if (age >= 1 && age <= 10) {
-                console.log('this is for children');
-                console.log('child');
-                var status = "child";
-                multi_rbi_status.push(status);
-                }
-                else if (age >= 11 && age <= 19) {
-                console.log('adolescent');
-                console.log('child');
-                var status = "adolescent";
-                multi_rbi_status.push(status);
-                }
-                else if ( age >= 60 ) {
-                console.log('elderly');
-                console.log('elderly');
-                var status = "elderly";
-                multi_rbi_status.push(status);
-                }
+            }
+            else if (age >= 1 && age <= 10) {
+                status = "child";
+            }
+            else if (age >= 11 && age <= 19) {
+                status = "adolescent";
+            }
+            else if ( age >= 60 ) {
+                status = "elderly";
+            }
+            else
+            {
+                status = "adult";
+            }
+            multi_rbi_status.push(status);
 
 
         });
@@ -3226,7 +3223,7 @@ $("#register-btn").click(function(e){
             multi_rbi_citizenship    : multi_rbi_citizenship,
             multi_rbi_occupation     : multi_rbi_occupation,
             multi_rbi_rel_to_head    : multi_rbi_rel_to_head,
-            multi_rbi_status             : multi_rbi_status,
+            multi_rbi_status         : multi_rbi_status,
             _token                   : '{{csrf_token()}}'
 
 

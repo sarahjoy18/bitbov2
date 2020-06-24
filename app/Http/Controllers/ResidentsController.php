@@ -128,6 +128,51 @@ class ResidentsController extends Controller
             //             'UPDATED_AT' => DB::RAW('CURRENT_TIMESTAMP')
             //         ]);
             // }
+            
+                //added by SJ 06242020, to set family header id before adding household members
+                if(strtolower(request('editrhead')) == "head")
+                {
+                    //check first if existing in  t_household_batch and t_household_members
+                    $household_record = DB::TABLE('t_household_batch AS HB')
+                            ->LEFTJOIN('t_household_members AS HM','HM.FAMILY_HEADER_ID','HB.FAMILY_HEADER_ID')
+                            ->WHERE('HM.RESIDENT_ID', request('resident_id'))
+                            ->SELECT
+                            (
+                                'HB.FAMILY_HEADER_ID','HM.RESIDENT_ID'
+                            )
+                            ->GET();
+
+                    if($household_record->isEmpty())
+                    {
+                        $get_family_header_last_id = DB::table('t_household_batch')
+                                                    ->insertgetid(['CREATED_AT' => DB::raw('current_timestamp'),
+                                                                   'UPDATED_AT' => DB::raw('current_timestamp')]);
+                        db::table('t_household_members')->insert([
+                            'FAMILY_HEADER_ID' =>  $get_family_header_last_id,
+                            'RESIDENT_ID' => request('resident_id')
+                        ]);
+                    }
+                    else if($household_record[0]->FAMILY_HEADER_ID>0)
+                    {
+                        echo "existing";
+                    }
+                    else
+                    {
+                        $get_family_header_last_id = DB::table('t_household_batch')
+                                                    ->insertgetid(['CREATED_AT' => DB::raw('current_timestamp'),
+                                                                   'UPDATED_AT' => DB::raw('current_timestamp')]);
+
+                         DB::TABLE('t_household_members')
+                            ->WHERE('RESIDENT_ID', request('resident_id'))
+                            ->UPDATE(
+                                [
+                                    'FAMILY_HEADER_ID'=> $get_family_header_last_id
+                                ]
+                            );
+                    }
+
+                    
+                }
              echo "good";
     }
 
