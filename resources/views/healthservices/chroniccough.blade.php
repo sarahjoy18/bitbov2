@@ -308,7 +308,7 @@
 		//swal
 	   	swal({
             title: "Are you sure?",
-            text: "Generate Newborn Record",
+            text: "Generate Chronic Cough Record",
             icon: "warning",
             buttons: [true, "Yes"],
             dangerMode: true,

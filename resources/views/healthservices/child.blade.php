@@ -346,7 +346,7 @@
 		//swal
 		   	swal({
 	            title: "Are you sure?",
-	            text: "Generate Newborn Record",
+	            text: "Generate Child Record",
 	            icon: "warning",
 	            buttons: [true, "Yes"],
 	            dangerMode: true,
