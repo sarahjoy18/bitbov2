@@ -3051,6 +3051,9 @@ $("#register-btn").click(function(e){
         multi_rbi_civil_status = [];
         multi_rbi_homeownership = [];
         multi_rbi_houseno = [];
+        //aded by SJ 06242020 - to fix error in rbi_store(), added hstreetno
+        multi_rbi_hstreet_no = [];
+        
         multi_rbi_hstreet = [];
         multi_rbi_hphase = [];
         multi_rbi_hbuilding = [];
@@ -3162,6 +3165,11 @@ $("#register-btn").click(function(e){
 
         $(".rbi-houseno").each(function(){
             multi_rbi_houseno.push($(this).val());
+        });
+
+        //added by SJ 06242020 - to fix error in rbi_store(), include hstreet_no
+        $(".rbi-hstreet_no").each(function(){
+            multi_rbi_hstreet_no.push($(this).val());
         });
 
         $(".rbi-hstreet").each(function(){

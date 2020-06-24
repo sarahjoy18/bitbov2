@@ -119,6 +119,7 @@
             $('#edit_db_name').text(fullname);
             
            
+           //edited by SJ 06192020 - included homeowner and pstaying in selecting value from database
             var homeowner = table.cell(this,2).data();
             var pstaying = table.cell(this,3).data();
             var edittoilet = table.cell( this, 5).data();           

@@ -529,7 +529,8 @@ _setElements: function () {
                     rules:{
                       firstname: {
                           required: true,
-                          nowhitespace: true,
+                          //edited by SJ - 06212020 allow space in firstname
+                          //nowhitespace: true,
                           lettersonly: true
                       },
                       middlename: {
@@ -2070,7 +2071,8 @@ $(document).ready(function(){
         rules:{
           fname: {
               required: true,
-              nowhitespace: true,
+              //edited by SJ 06212020 - allow spaces for first name
+              //nowhitespace: true,
               lettersonly: true
           },
           mname: {
@@ -2102,7 +2104,8 @@ $(document).ready(function(){
     messages:{
       fname: {
           required: 'This field is required',
-          nowhitespace: 'No white space allowed',
+          //edited by SJ 06212020 - allow spaces for first name
+          //nowhitespace: 'No white space allowed',
           lettersonly: 'letters only'
       },
       mname: {
@@ -3046,6 +3049,9 @@ $("#register-btn").click(function(e){
         multi_rbi_civil_status = [];
         multi_rbi_homeownership = [];
         multi_rbi_houseno = [];
+        //aded by SJ 06242020 - to fix error in rbi_store(), added hstreetno
+        multi_rbi_hstreet_no = [];
+        
         multi_rbi_hstreet = [];
         multi_rbi_hphase = [];
         multi_rbi_hbuilding = [];
@@ -3157,6 +3163,11 @@ $("#register-btn").click(function(e){
 
         $(".rbi-houseno").each(function(){
             multi_rbi_houseno.push($(this).val());
+        });
+
+        //added by SJ 06242020 - to fix error in rbi_store(), include hstreet_no
+        $(".rbi-hstreet_no").each(function(){
+            multi_rbi_hstreet_no.push($(this).val());
         });
 
         $(".rbi-hstreet").each(function(){
