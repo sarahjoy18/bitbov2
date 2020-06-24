@@ -158,8 +158,8 @@
 								<select class="form-control" id="sel_clearance_type" style="color: black;" hidden>
 									<option selected disabled value=""></option>
 									<option value="Barangay Business Permit">Barangay Business Permit</option>
-									<option>Permit Use of Barangay Property Facility</option>
-									<option>Display of Outdoor Advertisement</option>
+									<option value="Permit Use of Barangay Property Facility">Permit Use of Barangay Property Facility</option>
+									<option value="Display of Outdoor Advertisement">Display of Outdoor Advertisement</option>
 								</select>
 
 								<div class="col-md-8 col-sm-8">
@@ -364,11 +364,11 @@
 
 
 	$('#radioPropertyFacility').change(function(ev){
-		alert("radioPropertyFacility");
+		//alert("radioPropertyFacility");
 	});
 
 	$('#radioOutdoor').change(function(ev){
-		alert("radioOutdoor");
+		//alert("radioOutdoor");
 	});
 
 
@@ -416,10 +416,14 @@
 		if($('#radioBusinessPermit').is(':checked')){
 			clearance_type = "Barangay Business Permit"
 		}
-		else if($('#radioPropertyFacility').is(':checked')){alert('Permit Use of Barangay Property Facility');}
-		// else if($('#radioBusinessPermit').is(':checked')){alert('radioPropertyFacility');}
+		else if($('#radioPropertyFacility').is(':checked')){
+			clearance_type ="Permit Use of Barangay Property Facility";
+		}
+		else if($('#radioBusinessPermit').is(':checked')){
+			clearance_type ="radioPropertyFacility";
+		}
 
-		// var clearance_type = $('#sel_clearance_type option:selected').text();
+		//var clearance_type = $('#sel_clearance_type option:selected').text();
 		var form_type = $('#txt_form_type').val();
 		var business_id = $('#txt_business_id').val();
 		// Business Permit Requirement
@@ -433,7 +437,7 @@
 		, applicant_name = $('#txt_applicant_name').val()
 		;
 		// console.log(quarter);
-		alert(applicant_name);
+		//alert(applicant_name);
 		
 		let data = {
 			'_token' : " {{ csrf_token() }}"

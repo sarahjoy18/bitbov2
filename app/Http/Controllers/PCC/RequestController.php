@@ -660,6 +660,37 @@ class RequestController extends Controller
 
             return response()->json(['message' => $latest_form_id] );
         }
+        else
+        {
+             $application_form = DB::Table('t_application_form')
+                ->insert(array(
+                    'FORM_NUMBER' => 'SSS-SSS'
+                    ,'PAPER_TYPE_ID' => $clearance_type_id->PAPER_TYPE_ID
+                    ,'STATUS' => 'Pending'
+                    ,'BUSINESS_ID' => $BUSINESS_ID
+                    ,'RECEIVED_BY' => 'Shiela Mae A. Velga'
+                    ,'REQUESTED_PAPER_TYPE_ID' => $clearance_type_id->PAPER_TYPE_ID
+                    ,'APPLICANT_NAME' => $APPLICANT_NAME
+
+                ));
+
+            $latest_form_id = DB::table('t_application_form')->select('FORM_ID')->latest('FORM_ID')->first();
+
+            $business_permit = DB::table('t_bf_business_permit')
+                ->insert(array(
+                    'TAX_YEAR' => $TAX_YEAR
+                    ,'QUARTER' => $QUARTER
+                    ,'BARANGAY_PERMIT' => $BARANGAY_PERMIT
+                    ,'GARBAGE_FEE' => $GARBAGE_FEE
+                    ,'SIGNBOARD' => $SIGNBOARD
+                    ,'CTC' => $CTC
+                    ,'BUSINESS_TAX' => $BUSINESS_TAX
+                    ,'FORM_ID' => $latest_form_id->FORM_ID
+
+                ));
+
+            return response()->json(['message' => $latest_form_id, 'applicant_name' => $APPLICANT_NAME] );
+        }
 
     }
 }

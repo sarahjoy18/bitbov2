@@ -83,7 +83,7 @@
 								<td><?php echo e($row->REQUESTED_PAPER_TYPE); ?></td>
 								<td>
 									<button type="button" class="btn btn-yellow" id="btnPrintClearance"  data-toggle="modal">
-										<i class="fa fa-file-alt">&nbsp</i> Print <?php echo e($row->REQUESTED_PAPER_TYPE); ?>
+										<i class="fa fa-file-alt"></i> Print <?php echo e($row->REQUESTED_PAPER_TYPE); ?>
 
 									</button>
 								</td> 
@@ -228,7 +228,7 @@
 	$('#tbl_business_approved_lst').on('click', '#btnPrintClearance', function(){
 		let row = $(this).closest("tr")
 		, business_name =  $(row.find("td")[2]).text()
-		, requested_paper_type = $(row.find("td")[6]).text()
+		, requested_paper_type = $(row.find("td")[5]).text()
 		, clearance_id = $(row.find("td")[9]).text()
 		, form_id =  $(row.find("td")[8]).text();
 
@@ -501,7 +501,7 @@
 					});
 				}
 				else if (request_paper == "Barangay Clearance General Purposes"){
-					alert('General Purposes!');
+					//alert('General Purposes!');
 					var activity, company_name, address, or_no, or_date, or_amount, control_no;
 
 					$.each(response["barangay_clearance"], function(){

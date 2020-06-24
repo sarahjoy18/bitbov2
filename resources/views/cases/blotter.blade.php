@@ -264,26 +264,62 @@
             }
             else
             {
+                // $.ajax({
+                //   url: "{{route('AddPatawag')}}",
+                //   method:'POST',
+                //   data:data,
+                //   context: document.body,
+                //     }).done(function(response) {
+                //         if(response['status_code']==200)
+                //         {
+                //             swal({
+                //                 title: 'Success!',
+                //                 text: 'You have successfully scheduled a hearing.',
+                //                 icon: 'success',
+                //             } );
+                //         }
+                      
+                //     }).fail(function(jqXHR, textStatus, errorThrown) {
+                //         console.log('dsdfsd');
+                //       }).complete(function(response){
+                //             if(response['status_code']==200)
+                //             {
+                //                 swal({
+                //                     title: 'Success!',
+                //                     text: 'You have successfully scheduled a hearing.',
+                //                     icon: 'success',
+                //                 } );
+                //             }
+                //             else
+                //             {
+                //                 swal({
+                //                     title: 'Wait!',
+                //                     text: response["status_text"],
+                //                     icon: 'warning',
+                //                 } );
+                //             }
+                //       });
+
+                console.log('umabot ako dito');
                 $.ajax({
-                  url: "{{route('AddPatawag')}}",
-                  method:'POST',
-                  data:data,
-                  context: document.body,
-                    }).done(function() {
-                      console.log('umabot ako dito');
-                      swal({
-                            title: 'Success!',
-                            text: 'You have successfully scheduled a hearing.',
-                            icon: 'success',
-                        } );
-                    }).fail(function(jqXHR, textStatus, errorThrown) {
-                        console.log('jqXHR:',jqXHR);
-                        console.log('textStatus:',textStatus);
-                        console.log('errorThrown:',errorThrown);
-                      })
-                      .always(function() {
-                        alert( "complete" );
-                      });
+                    url : "{{ route('AddPatawag') }}",
+                    method : 'POST',
+                    data : data,
+                    success : function()
+                            {
+                                location.reload();
+                            },
+                    error   : function()
+                            {
+                                alert('umabot sila dito');
+                            }
+                }); 
+
+                swal({
+                        title: 'Success!',
+                        text: 'You have successfully scheduled a hearing.',
+                        icon: 'success',
+                    } ); 
             }
 
         });

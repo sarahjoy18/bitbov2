@@ -1,6 +1,6 @@
 @extends('global.main')
 
-@if(session('session_permis_issuance_of_forms')!='1' && session('session_position')!='Data Protection Officer')
+@if(session('session_permis_ordinances')!='1' && session('session_position')!='Data Protection Officer')
 <script type="text/javascript">location.href='{{route("Dashboard")}}'</script>
 @else
 
