@@ -36,7 +36,7 @@ class PatawagController extends Controller
 
     public function store(Request $request)
     {
-        // try {
+        try {
             $date = $request->input('AddScheduledDate');
             $intime = $request->input('AddScheduledTime');
             $time = date("H:i:s", strtotime($intime));
@@ -56,13 +56,13 @@ class PatawagController extends Controller
                 ]);
 
             //return response('Schedule added successfully!', 200)->header('Content-Type', 'text/plain');
-            //return response()->json(['status_text' => 'Schedule added successfully!', 'status_code' => 200);  
+            //return response()->json(["status_text" => "Schedule added successfully!", "status_code" => 200]);  
 
-         // } catch (\Exception $e) {
+         } catch (\Exception $e) {
 
-        //     //return response('$e->getMessage()', 400)->header('Content-Type', 'text/plain');
-             // return response()->json(['status_text' => $e->getMessage(), 'status_code' => 400);  
-         // }
+            //return response('$e->getMessage()', 400)->header('Content-Type', 'text/plain');
+             return response()->json(["status_text" => $e->getMessage(), "status_code" => 400]);  
+         }
     }
 
     public function update(Request $request)

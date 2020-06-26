@@ -32,10 +32,23 @@
             Notification.init();
 
             $('#data-table-default1').DataTable();
+            // $('#AddScheduledDate').datepicker({
+            //     minDate:0,
+            //     dateFormat: "yy-mm-dd"
+            // });
+            //edited by SJ 06262020-separated schedule date and time
             $('#AddScheduledDate').datepicker({
-                minDate:0,
-                dateFormat: "yy-mm-dd"
+                        minDate:0,
+                        dateFormat: "yy-mm-dd"
+                    });
+
+            $('#AddScheduledTime').timepicker({ 
+                timeFormat:'h:i A',
+                interval:5,
+                minTime:'7:00 am',
+                maxTime:'5:00 pm'
             });
+
             $('#add_incident_date').datepicker({
                 maxDate:0,
                 dateFormat: "yy-mm-dd"
@@ -219,8 +232,10 @@
             var my_date = $('#AddScheduledDate').val()
             get_convert = moment(my_date).format('YYYY-MM-DD, h:mm A');
             schedDate = get_convert.split(", ")[0];
-            schedTime = get_convert.split(", ")[1];
-        //     var schedTime = $('#AddScheduledTime').val()
+            //schedTime = get_convert.split(", ")[1];
+
+            //edited by SJ 06262020 - separated schedule date and time
+            schedTime = $('#AddScheduledTime').val()
             
             var schedPlace = $('#addScheduledPlace').val()
 
@@ -242,11 +257,11 @@
                 _token:"{{csrf_token()}}"
             };
 
-           // alert(schedTime)
 
-            if(schedDate == "" || schedPlace == "")
+            if(schedDate == "" || schedTime =="" || schedPlace == "")
             {
                 $('#reqScheduledDateAdd').html('Required field!').css('color', 'red');
+                $('#reqScheduledTimeAdd').html('Required field!').css('color', 'red');
                 $('#reqScheduledPlaceAdd').html('Required field!').css('color', 'red');
                 swal({
                     title: 'Ooops!',
@@ -264,6 +279,7 @@
             }
             else
             {
+
                 // $.ajax({
                 //   url: "{{route('AddPatawag')}}",
                 //   method:'POST',
@@ -280,7 +296,7 @@
                 //         }
                       
                 //     }).fail(function(jqXHR, textStatus, errorThrown) {
-                //         console.log('dsdfsd');
+                //         console.log(jqXHR);
                 //       }).complete(function(response){
                 //             if(response['status_code']==200)
                 //             {
@@ -298,28 +314,37 @@
                 //                     icon: 'warning',
                 //                 } );
                 //             }
+
+                //             location.reload();
+
                 //       });
 
-                console.log('umabot ako dito');
-                $.ajax({
-                    url : "{{ route('AddPatawag') }}",
-                    method : 'POST',
-                    data : data,
-                    success : function()
-                            {
-                                location.reload();
-                            },
-                    error   : function()
-                            {
-                                alert('umabot sila dito');
-                            }
-                }); 
 
-                swal({
+                try
+                {
+                    $.ajax({
+                        url: "{{route('AddPatawag')}}",
+                        method:'POST',
+                        data:data,
+                        
+                        success:function()
+                        {
+                            location.reload();
+                        }
+                   });
+
+                    swal({
                         title: 'Success!',
                         text: 'You have successfully scheduled a hearing.',
                         icon: 'success',
-                    } ); 
+
+                    } ).then(() => location.reload());
+                    //alert('success!');
+                }
+                catch(error)
+                {
+                    console.error(error)
+                }
             }
 
         });
@@ -1281,14 +1306,34 @@
                                              <h2 id="ViewPatawagBlotterCode" align="center"></h2>
                                             <label style="display: block; text-align: center">Blotter Code</label>
                                             <div class="col-lg-12">
+                                                <!-- <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Scheduled Date</label> <span id='reqScheduledDateAdd'></span>
+                                                            <input type="text" id="AddScheduledDate" name="AddScheduledDate" class="form-control" required="true" placeholder="yyyy-mm-dd">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Scheduled Time</label> <span id='reqScheduledTimeEdit'></span>
+                                                            <input type="text" id="updateScheduledTime" name="updateScheduledTime" class="form-control" required="true">
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                </div> -->
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label>Scheduled Date</label> <span id='reqScheduledDateAdd'></span>
-                                                            <input type="datetime-local" id="AddScheduledDate" name="AddScheduledDate" class="form-control" required="true" placeholder="yyyy-mm-dd">
+                                                            <input type="text" id="AddScheduledDate" name="AddScheduledDate" class="form-control" required="true">
                                                         </div>
                                                     </div>
-                                                    
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Scheduled Time</label> <span id='reqScheduledTimeAdd'></span>
+                                                            <input type="text" id="AddScheduledTime" name="AddScheduledTime" class="form-control" required="true">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
