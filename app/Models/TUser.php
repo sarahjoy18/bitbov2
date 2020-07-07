@@ -53,7 +53,7 @@ use Auth;
  */
 class TUser extends Eloquent 
 {
-		
+	protected $table = 't_users';	
 	protected $primaryKey = 'USER_ID';
 	public $timestamps = false;
 	
