@@ -92,9 +92,9 @@
 
         rules:{
           rbi_firstname: {
-              required: true,
+              required: true
               
-              lettersonly: true
+              //lettersonly: true
           },
           rbi_middlename: {
 
@@ -163,8 +163,9 @@
     messages:{
       rbi_firstname: {
           required: 'This field is required',
-          nowhitespace: 'No white space allowed',
-          lettersonly: 'letters only'
+          //edited by SJ 07102020
+          // nowhitespace: 'No white space allowed',
+          // lettersonly: 'letters only'
       },
       rbi_middlename: {
           nowhitespace: 'No white space allowed',
@@ -281,6 +282,12 @@
         }
     });
 
+  //added by SJ 07102020 - claose modal after showing default username and password
+  $(document).on('click','#close_modal',function() {
+        
+        location.reload();
+    }); 
+
   $('#register-rbi-btn').on('click',function() {
 
     if($('#AddForm').valid()) {
@@ -345,14 +352,17 @@
           url:"<?php echo e(route('AddNewUserOfficial')); ?>",
           type:'post',
           data:data,
-          success:function()
+          success:function(data)//edited by SJ 07102020- show default username and password of newly created user
           {
-            console.log(data)
-          },
-          error:function()
+            $('#defusername').val(data.username);
+            $('#defpassword').val(rbi_employee_no);
+            $('#show_default').modal('show')
+              //location.reload();
+          } ,
+          error: function(error)
           {
-            console.log(data)
-          }
+              console.error(error);
+          }  
 
         })
         
@@ -392,6 +402,58 @@ label.error {
 }
 </style>
 <!-- begin #content -->
+<div class="modal fade" id="show_default" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 50%">
+
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #242a30">
+                <h4 class="modal-title" style="color: white">DEFAULT USERNAME AND PASSWORD</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">×</button> -->
+            </div>
+            <div class="modal-body">
+
+                <form >
+                    <div class="note note-warning note-with-right-icon">
+                      <div class="note-icon"><i class="fa fa-lightbulb"></i></div>
+                      <div class="note-content text-center">
+                        <h4><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNOTE!</b></h4>
+                        <p>&nbsp&nbspPLEASE NOTE YOUR DEFAULT USERNAME AND PASSWORD </p>
+                      </div>
+                    </div>
+                    
+                    <br>
+                    <?php echo e(csrf_field()); ?>
+
+                    <h4><label style="display: block; text-align: center">Notice</label></h4>
+                    <h3><b><label style="text-transform: capitalize; display: block; text-align: center;" ></label></b></h3>
+                    <br>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <h><label style="display: block; text-align: center">&nbspUsername</label></h>
+                            <input style="display: block; text-align: center; background-color: white;color: black;font-size: 20px" type='text' class='form-control' id="defusername" readonly/>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <h><label style="display: block; text-align: center">&nbspPassword</label></h>
+                            <input style="display: block; text-align: center; background-color: white;color: black;font-size: 20px" type="text" class='form-control' id="defpassword" readonly />
+                        </div>
+                    </div>
+
+                    <div class="modal-footer" align="center">
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal" id="close_modal" name="close_modal">Close</a>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- end tab-pane -->
+</div>
+
 <div id="content" class="content">
     <div class="panel panel-inverse">
         <div class="panel-heading">

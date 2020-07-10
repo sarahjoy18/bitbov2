@@ -581,7 +581,8 @@ _setElements: function () {
                 messages:{
                   firstname: {
                       required: 'This field is required',
-                      nowhitespace: 'No white space allowed',
+                      //edited by SJ 07102020
+                      // nowhitespace: 'No white space allowed',
                       lettersonly: 'letters only'
                   },
                   middlename: {

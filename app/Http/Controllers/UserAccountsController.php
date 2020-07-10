@@ -376,9 +376,10 @@ class UserAccountsController extends Controller
         $resident_id = db::table('t_resident_basic_info')
         ->insertgetid([
 
-                    'LASTNAME' => strtoupper(request('rbi_firstname')),
+                    //edited by SJ 07102020 - corrected firstname and lastname
+                    'FIRSTNAME' => strtoupper(request('rbi_firstname')),
                     'MIDDLENAME' => strtoupper(request('rbi_middlename')),
-                    'FIRSTNAME' => strtoupper(request('rbi_lastname')),
+                    'LASTNAME' => strtoupper(request('rbi_lastname')),
                     'ADDRESS_HOUSE_NO' => request('rbi_house_no'),
                     'ADDRESS_STREET_NO' => request('rbi_street_no'),
                     'ADDRESS_STREET' => request('rbi_street'),
@@ -464,7 +465,11 @@ class UserAccountsController extends Controller
                 DB::TABLE('t_hs_elderly')->INSERT(['RESIDENT_ID' => $resident_id, 'CREATED_AT' => DB::RAW('CURRENT_TIMESTAMP')]);
             }
 
-        echo "good";
+        //edited by SJ 07102020 - return username of newly created user
+        $credentials = (object) ['username' => $get_name];
+        return response()->json($credentials);
+
+        //echo "good";
     }
     
     public function addnewuserview()

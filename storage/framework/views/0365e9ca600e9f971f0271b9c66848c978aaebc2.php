@@ -401,14 +401,15 @@
                                         <label class="col-md-3 col-form-label text-md-right">Secret Answer <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                             <input type="text" name="secret_answer_txt" placeholder="Answer to your secret question"  data-parsley-group="step-2" class="form-control m-b-10" data-parsley-required="false" />
-                                            
                                         </div>
                                     </div>
                                     <!-- end form-group -->
                                     <div class="form-group row m-b-10">
-                                        <p><a href="javascript:;"  id="register_btn" style="margin-left:800px" class="btn btn-primary btn-lg">Register</a> </p>
-                                        <div class="fa-3x" style="display: none; position:absolute; margin-left:920px;" id="spnner">
-                                            <i class="fas fa-circle-notch fa-spin" style="position:absolute; top:7px;"></i>
+                                        <div class="col-md-1">
+                                            <p><a href="javascript:;"  id="register_btn" style="margin-left:800px" class="btn btn-primary btn-lg">Register</a> </p>
+                                            <div class="fa-3x" style="display: none; position:absolute; margin-left:920px;" id="spnner">
+                                                <i class="fas fa-circle-notch fa-spin" style="position:absolute; top:7px;"></i>
+                                            </div>
                                         </div>
                                     </div>
 
