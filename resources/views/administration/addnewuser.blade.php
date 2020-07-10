@@ -172,7 +172,7 @@
     },
     messages:{
       rbi_firstname: {
-          required: 'This field is required',
+          required: 'This field is required'
           //edited by SJ 07102020
           // nowhitespace: 'No white space allowed',
           // lettersonly: 'letters only'
@@ -412,6 +412,7 @@ label.error {
 }
 </style>
 <!-- begin #content -->
+<!-- added by SJ 07102020 -->
 <div class="modal fade" id="show_default" data-backdrop="static">
     <div class="modal-dialog" style="max-width: 50%">
 
